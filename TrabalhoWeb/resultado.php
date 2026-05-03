@@ -48,8 +48,8 @@ $ValorTotalDoCorte = $servicoResultado['valor'] * $pessoas;
                 </ul>
 
                 <!-- botao para retornar a pagina inicial -->
-                <div class="text-center mt-3 mb-3">
-                    <a href = "index.php" class = "btn btn-dark" style="font-family: 'Georgia', serif;"> Retornar a pagina de serviços</a>
+                <div class="text-center mt-3 mb-1 ">
+                    <a href = "index.php" class = "btn btn-dark butaoalinharborda" style="font-family: 'Georgia', serif;"> Retornar a pagina de serviços</a>
                 </div>
             </div>
 

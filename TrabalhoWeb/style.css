@@ -40,3 +40,13 @@
     background-color: var(--vermelho) !important;
     border-color: var(--vermelho) !important;
 }
+.card {
+    border-radius: 30px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+    overflow:auto
+}
+.butaoalinharborda{
+    border-radius: 30px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+    overflow:auto
+}
