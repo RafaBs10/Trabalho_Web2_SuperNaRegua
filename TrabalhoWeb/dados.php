@@ -8,12 +8,12 @@ $servicos = [
     ["id" => 6, "nome" => "Pigmentação", "tipo" => "Premium", "valor" => 35, "horarios" => ["14:30", "18:00"]]
 ];
 
-function buscaporID($id)
+function buscaPorId($id)
 {
     global $servicos;
-    foreach ($servicos as $valor) {
-        if ($id == $valor["id"]) {
-            return $valor;
+    foreach ($servicos as $servico) {
+        if ($id == $servico["id"]) {
+            return $servico;
         }
     }
     return null;

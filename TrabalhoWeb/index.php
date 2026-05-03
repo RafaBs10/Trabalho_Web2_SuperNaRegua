@@ -2,19 +2,20 @@
 require 'dados.php';
 
 if (isset($_GET['tipo'])) {
-    $tipo = $_GET['tipo'];
-    $filtrados = array_filter($servicos, function ($servico) use ($tipo) {
-        return $servico["tipo"] == $tipo;
+    $tipoFiltro = $_GET['tipo'];
+    $listaFiltrada = array_filter($servicos, function ($servico) use ($tipoFiltro) {
+        return $servico["tipo"] == $tipoFiltro;
     });
 } else {
-    $filtrados = $servicos;
+    $listaFiltrada = $servicos;
 }
-$total = count($filtrados);
 
-$tipos = [];
-foreach ($servicos as $valor) {
-    if (!in_array($valor["tipo"], $tipos)) {
-        $tipos[] = $valor["tipo"];
+$totalServicos = count($listaFiltrada);
+
+$listaTipos = [];
+foreach ($servicos as $servico) {
+    if (!in_array($servico["tipo"], $listaTipos)) {
+        $listaTipos[] = $servico["tipo"];
     }
 }
 ?>
@@ -23,16 +24,16 @@ foreach ($servicos as $valor) {
 
 <div class="container mt-4">
     <h1>Serviços</h1>
-    <p>Total de serviços: <?php echo $total; ?></p>
+    <p>Total de serviços: <?php echo $totalServicos; ?></p>
 
     <div class="mb-3">
         <a href="index.php" class="btn <?php echo !isset($_GET['tipo']) ? 'btn-dark' : 'btn-outline-dark'; ?>">
             Todos
         </a>
-        <?php foreach ($tipos as $t): ?>
-            <a href="index.php?tipo=<?php echo $t; ?>"
-                class="btn <?php echo isset($_GET['tipo']) && $_GET['tipo'] == $t ? 'btn-dark' : 'btn-outline-dark'; ?>">
-                <?php echo $t; ?>
+        <?php foreach ($listaTipos as $tipo): ?>
+            <a href="index.php?tipo=<?php echo $tipo; ?>"
+                class="btn <?php echo isset($_GET['tipo']) && $_GET['tipo'] == $tipo ? 'btn-dark' : 'btn-outline-dark'; ?>">
+                <?php echo $tipo; ?>
             </a>
         <?php endforeach; ?>
     </div>
@@ -48,7 +49,7 @@ foreach ($servicos as $valor) {
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($filtrados as $servico): ?>
+            <?php foreach ($listaFiltrada as $servico): ?>
                 <tr <?php echo empty($servico["horarios"]) ? 'class="table-secondary"' : ''; ?>>
                     <td><?php echo htmlspecialchars($servico["nome"]); ?></td>
                     <td>
