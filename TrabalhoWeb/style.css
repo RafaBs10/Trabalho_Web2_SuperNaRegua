@@ -1,0 +1,42 @@
+:root {
+    --azul: #0d1b6e;
+    --vermelho: #cc0000;
+    --branco: #ffffff;
+}
+
+.navbar {
+    background-color: var(--azul) !important;
+}
+
+.navbar-brand img {
+    height: 45px;
+    margin-right: 10px;
+}
+
+.btn-dark {
+    background-color: var(--vermelho) !important;
+    border-color: var(--vermelho) !important;
+}
+
+.btn-outline-dark {
+    color: var(--vermelho) !important;
+    border-color: var(--vermelho) !important;
+}
+
+.btn-outline-dark:hover {
+    background-color: var(--vermelho) !important;
+    color: var(--branco) !important;
+}
+
+.table thead {
+    background-color: var(--azul) !important;
+}
+
+.badge.bg-primary {
+    background-color: var(--azul) !important;
+}
+
+.btn-primary {
+    background-color: var(--vermelho) !important;
+    border-color: var(--vermelho) !important;
+}

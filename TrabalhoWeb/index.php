@@ -38,42 +38,44 @@ foreach ($servicos as $servico) {
         <?php endforeach; ?>
     </div>
 
-    <table class="table table-bordered table-hover">
-        <thead class="table-dark">
-            <tr>
-                <th>Nome</th>
-                <th>Tipo</th>
-                <th>Valor</th>
-                <th>Horários</th>
-                <th>Ação</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($listaFiltrada as $servico): ?>
-                <tr <?php echo empty($servico["horarios"]) ? 'class="table-secondary"' : ''; ?>>
-                    <td><?php echo htmlspecialchars($servico["nome"]); ?></td>
-                    <td>
-                        <span class="badge bg-primary">
-                            <?php echo htmlspecialchars($servico["tipo"]); ?>
-                        </span>
-                    </td>
-                    <td>R$ <?php echo number_format($servico["valor"], 2, ',', '.'); ?></td>
-                    <td>
-                        <?php if (empty($servico["horarios"])): ?>
-                            <span class="badge bg-danger">Sem horários</span>
-                        <?php else: ?>
-                            <?php echo implode(', ', $servico["horarios"]); ?>
-                        <?php endif; ?>
-                    </td>
-                    <td>
-                        <a href="detalhes.php?id=<?php echo $servico["id"]; ?>" class="btn btn-sm btn-primary">
-                            Detalhes
-                        </a>
-                    </td>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>Valor</th>
+                    <th>Horários</th>
+                    <th>Ação</th>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php foreach ($listaFiltrada as $servico): ?>
+                    <tr <?php echo empty($servico["horarios"]) ? 'class="table-secondary"' : ''; ?>>
+                        <td><?php echo htmlspecialchars($servico["nome"]); ?></td>
+                        <td>
+                            <span class="badge bg-primary">
+                                <?php echo htmlspecialchars($servico["tipo"]); ?>
+                            </span>
+                        </td>
+                        <td>R$ <?php echo number_format($servico["valor"], 2, ',', '.'); ?></td>
+                        <td>
+                            <?php if (empty($servico["horarios"])): ?>
+                                <span class="badge bg-danger">Sem horários</span>
+                            <?php else: ?>
+                                <?php echo implode(', ', $servico["horarios"]); ?>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <a href="detalhes.php?id=<?php echo $servico["id"]; ?>" class="btn btn-sm btn-primary">
+                                Detalhes
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <?php require 'footer.php'; ?>
