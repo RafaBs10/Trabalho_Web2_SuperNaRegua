@@ -10,6 +10,7 @@ if (isset($_GET['tipo'])) {
     $listaFiltrada = $servicos;
 }
 
+
 $totalServicos = count($listaFiltrada);
 
 $listaTipos = [];
@@ -75,7 +76,44 @@ foreach ($servicos as $servico) {
                 <?php endforeach; ?>
             </tbody>
         </table>
-    </div>
-</div>
 
-<?php require 'footer.php'; ?>
+
+        <div>
+            <div class="card-body">
+
+                <h2 class="mb-4">Agendamento</h2>
+
+                <form action="confirmacao.php" method="post">
+
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome:</label>
+                        <input type="text" name="nome" id="nome" placeholder="Seu nome" required maxlength="30"
+                            class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="pessoa" class="form-label">Quantidade de pessoas:</label>
+                        <select name="pessoa" id="pessoa" class="form-select" required>
+                            <option value="">Selecione</option>
+                            <option value="1">1 pessoa</option>
+                            <option value="2">2 pessoas</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="horario" class="form-label">Horário:</label>
+                        <input type="time" name="horario" id="horario" required class="form-control">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Enviar inscrição</button>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <?php require 'footer.php'; ?>
