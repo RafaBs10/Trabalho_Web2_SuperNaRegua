@@ -3,19 +3,12 @@ require 'dados.php';
 
 
 
-$nome = htmlspecialchars($_POST['nome']);
-$pessoas = htmlspecialchars($_POST['pessoas']);
+$nome = htmlspecialchars($_POST['nome']) ;
+$pessoas = htmlspecialchars($_POST['pessoa']);
 $horario = htmlspecialchars($_POST['horario']);
 $id = (int) $_POST['id'];
 
 
-
-
-//como o formulario ainda n foi feito, estou testando com valores dados aleatorios
-$nome = "Luan";
-$pessoas = 2;
-$horario = "09:00";
-$id = 1;
 $servicoResultado = buscaPorId($id);
 
 $ValorTotalDoCorte = $servicoResultado['valor'] * $pessoas;
