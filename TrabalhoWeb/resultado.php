@@ -1,21 +1,37 @@
 <?php
 require 'dados.php';
 
-
-
-$nome = htmlspecialchars($_POST['nome']);
-$pessoas = htmlspecialchars($_POST['pessoas']);
-$horario = htmlspecialchars($_POST['horario']);
-$id = (int) $_POST['id'];
+$erros = [];
 
 
 
+$nome = htmlspecialchars(($_POST['nome'] ?? ''));
+if (empty($nome)) {
+    $erros[] = 'Campo nome nao encontrado';
+}
+$pessoas = htmlspecialchars(($_POST['pessoas'] ?? ''));
+if (empty($pessoas)) {
+    $erros[] = 'Campo pessoas nao encontrado';
+}
+$horario = htmlspecialchars(($_POST['horario'] ?? ''));
+if (empty($horario)) {
+    $erros[] = 'Campo horario nao encontrado';
+}
 
-//como o formulario ainda n foi feito, estou testando com valores dados aleatorios
+
+
+
+
+
+$id = (int) ($_POST['id'] ?? 0);
 
 $servicoResultado = buscaPorId($id);
-
-$ValorTotalDoCorte = $servicoResultado['valor'] * $pessoas;
+if ($servicoResultado === null) {
+    $erros[] = 'Serviço não encontrado';
+}
+if (empty($erros)) {
+    $ValorTotalDoCorte = $servicoResultado['valor'] * $pessoas;
+}
 
 ?>
 
@@ -24,7 +40,7 @@ $ValorTotalDoCorte = $servicoResultado['valor'] * $pessoas;
     <div class="row justify-content-center">      <!-- o row sendo utilizado para centralizar as colunas no centro -->
         <div class="col-md-5">      <!-- colunas de tamanho 5 por 12  -->
             <div class="text-center mb-3">      <!-- afata o titulo do card -->
-                <h1 class="text-center text-danger" style="font-family: 'Georgia', serif;">Agendamento Confirmado</h1>
+                <h1 class="text-center text-success" style="font-family: 'Georgia', serif;">Agendamento Confirmado</h1>
             </div>
                <!-- todos os elementos do formulario vao entrar dentro desse card -->
             <div class="card">
@@ -40,6 +56,7 @@ $ValorTotalDoCorte = $servicoResultado['valor'] * $pessoas;
                 <li class=" list-group-item"> <strong>Valor do servico: R$ </strong><?php echo number_format($servicoResultado['valor'], 2, ',', '.'); ?> </li>
                 <li class=" list-group-item"> <strong>Horario Marcado: </strong><?php echo $horario; ?> </li>
                 <li class=" list-group-item"> <strong>Quantidade de pessoas: </strong><?php echo $pessoas; ?> </li>
+                
                 <!-- cor verde no valor total, deixando a linha toda na cor verde -->
                 <li class=" list-group-item list-group-item-success text-end"> <strong>Valor total: R$  </strong><?php echo number_format($ValorTotalDoCorte, 2, ',', '.'); ?> </li>
                 </ul>
