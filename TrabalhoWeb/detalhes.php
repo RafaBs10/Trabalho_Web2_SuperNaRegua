@@ -33,6 +33,7 @@ if ($procurarservico == null) {
             <h2>DETALHES:</h2>
 
             <?php
+            //exibe info das id, o implode pega a info de array e converte, o number formata o numero
             echo '<p><strong>Corte:</strong> ' . $procurarservico['nome'] . '</p>';
             echo '<p><strong>Tipo:</strong> ' . $procurarservico['tipo'] . '</p>';
             echo '<p><strong>Valor:</strong> R$ ' . number_format($procurarservico['valor'], 2, ',', '.') . '</p>';

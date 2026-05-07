@@ -3,11 +3,15 @@ require 'dados.php';
 
 
 
-$nome = htmlspecialchars($_POST['nome']) ;
-$pessoas = htmlspecialchars($_POST['pessoa']);
+$nome = htmlspecialchars($_POST['nome']);
+$pessoas = htmlspecialchars($_POST['pessoas']);
 $horario = htmlspecialchars($_POST['horario']);
 $id = (int) $_POST['id'];
 
+
+
+
+//como o formulario ainda n foi feito, estou testando com valores dados aleatorios
 
 $servicoResultado = buscaPorId($id);
 
