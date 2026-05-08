@@ -31,9 +31,9 @@ foreach ($servicos as $servico) {
             Todos
         </a>
         <?php foreach ($listaTipos as $tipo): ?>
-            <a href="index.php?tipo=<?php echo $tipo; ?>"
+            <a href="index.php?tipo=<?php echo htmlspecialchars($tipo); ?>"
                 class="btn <?php echo isset($_GET['tipo']) && $_GET['tipo'] == $tipo ? 'btn-dark' : 'btn-outline-dark'; ?>">
-                <?php echo $tipo; ?>
+                <?php echo htmlspecialchars($tipo); ?>
             </a>
         <?php endforeach; ?>
     </div>
