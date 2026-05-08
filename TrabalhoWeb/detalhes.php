@@ -38,7 +38,7 @@ $temHorarios = !empty($procurarservico['horarios']);
                 <div class="col-md-4">
                     <img src="<?php echo htmlspecialchars($procurarservico['imagem']); ?>"
                         alt="<?php echo htmlspecialchars($procurarservico['nome']); ?>"
-                        style="width: 100%; border-radius: 12px;">
+                        style="width: 100%; border-radius: 14px;">
                 </div>
 
             </div>
