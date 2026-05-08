@@ -3,9 +3,15 @@ require 'dados.php';
 
 if (isset($_GET['tipo'])) {
     $tipoFiltro = $_GET['tipo'];
-    $listaFiltrada = array_filter($servicos, function ($servico) use ($tipoFiltro) {
-        return $servico["tipo"] == $tipoFiltro;
-    });
+
+    $listaFiltrada = [];
+
+    foreach ($servicos as $servico) {
+        if ($servico["tipo"] == $tipoFiltro) {
+            $listaFiltrada[] = $servico;
+        }
+    }
+
 } else {
     $listaFiltrada = $servicos;
 }
