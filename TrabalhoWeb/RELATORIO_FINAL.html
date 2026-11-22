@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade em Grupo · Projeto de Evolução do Sistema (MVC)</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm 16mm 20mm 16mm;
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #000000;
+            line-height: 1.45;
+            font-size: 10.5pt;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+        .header-doc {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+        .titulo-doc {
+            color: #1F4E79;
+            font-size: 17pt;
+            font-weight: bold;
+            margin: 0 0 4px 0;
+        }
+        .subtitulo-doc {
+            color: #595959;
+            font-size: 9.5pt;
+            margin: 0;
+        }
+        h2 {
+            color: #1F4E79;
+            font-size: 13pt;
+            font-weight: bold;
+            margin-top: 24px;
+            margin-bottom: 8px;
+            page-break-after: avoid;
+        }
+        h3 {
+            color: #000000;
+            font-size: 10.5pt;
+            font-weight: bold;
+            margin-top: 14px;
+            margin-bottom: 6px;
+            page-break-after: avoid;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 8px 0 14px 0;
+            font-size: 9.5pt;
+            page-break-inside: avoid;
+        }
+        th, td {
+            border: 1px solid #7F7F7F;
+            padding: 6px 8px;
+            text-align: left;
+            vertical-align: middle;
+        }
+        th {
+            background-color: #1F4E79;
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+        .tabela-identificacao td:first-child {
+            width: 32%;
+            font-weight: bold;
+            background-color: #FFFFFF;
+        }
+        .caixa-resposta {
+            border: 1px solid #7F7F7F;
+            padding: 10px 12px;
+            margin-bottom: 14px;
+            background-color: #FFFFFF;
+            font-size: 10pt;
+            line-height: 1.45;
+            text-align: justify;
+        }
+        .diagram-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 10px 0;
+            page-break-inside: avoid;
+        }
+        .diagram-entity {
+            border: 1px solid #7F7F7F;
+            background: #FFFFFF;
+            margin-bottom: 8px;
+            font-size: 9pt;
+            font-family: Consolas, 'Courier New', monospace;
+        }
+        .diagram-entity-header {
+            background-color: #1F4E79;
+            color: #FFFFFF;
+            font-weight: bold;
+            padding: 4px 6px;
+            text-align: center;
+        }
+        .diagram-entity-body {
+            padding: 5px 6px;
+            line-height: 1.35;
+        }
+        pre {
+            background-color: #FFFFFF;
+            border: 1px solid #7F7F7F;
+            padding: 10px;
+            font-family: Consolas, 'Courier New', monospace;
+            font-size: 9pt;
+            line-height: 1.35;
+            margin: 8px 0 14px 0;
+            page-break-inside: avoid;
+        }
+        .footer-pagina {
+            text-align: right;
+            font-size: 8.5pt;
+            color: #7F7F7F;
+            margin-top: 30px;
+            padding-top: 5px;
+        }
+        @media print {
+            body {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header-doc">
+        <div class="titulo-doc">Atividade em Grupo · Projeto de Evolução do Sistema</div>
+        <div class="subtitulo-doc">WEB2/LWEB2 · 4º Bimestre · Prof.ª Elizabeth Duane · CEFET-MG Unidade Contagem</div>
+    </div>
+
+    <table class="tabela-identificacao">
+        <tr>
+            <td>Nome do sistema</td>
+            <td>Super na Régua</td>
+        </tr>
+        <tr>
+            <td>Domínio (do 1º bimestre)</td>
+            <td>https://supernaregua.gamer.gd/index.php</td>
+        </tr>
+        <tr>
+            <td>URL do sistema publicado (4º bimestre)</td>
+            <td>https://supernaregua.infinityfreeapp.com</td>
+        </tr>
+        <tr>
+            <td>Link do vídeo (até 10 min)</td>
+            <td>https://youtu.be/SEU_LINK_AQUI</td>
+        </tr>
+        <tr>
+            <td>Integrante 1</td>
+            <td>Luan Henrique Neves Miranda</td>
+        </tr>
+        <tr>
+            <td>Integrante 2</td>
+            <td>Miguel Silva Rodrigues</td>
+        </tr>
+        <tr>
+            <td>Integrante 3</td>
+            <td>Rafael Borges Silva</td>
+        </tr>
+    </table>
+
+    <h2>1. Identificação e Usuários de Teste</h2>
+
+    <p style="margin-bottom: 6px;">Usuários cadastrados no banco de dados para os testes da avaliação e arguição:</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Perfil</th>
+                <th>Nome Completo</th>
+                <th>E-mail</th>
+                <th>Senha de Teste</th>
+                <th>Permissão de Acesso</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Administrador</td>
+                <td>Administrador</td>
+                <td>admin@supernaregua.com</td>
+                <td>123456</td>
+                <td>Painel de controle, gerenciar serviços (cadastrar, editar e excluir)</td>
+            </tr>
+            <tr>
+                <td>Cliente</td>
+                <td>João Cliente</td>
+                <td>joao@email.com</td>
+                <td>123456</td>
+                <td>Catálogo, detalhes, agendar serviço e consultar/cancelar agendamentos</td>
+            </tr>
+            <tr>
+                <td>Cliente</td>
+                <td>Maria Cliente</td>
+                <td>maria@email.com</td>
+                <td>123456</td>
+                <td>Catálogo, detalhes, agendar serviço e consultar/cancelar agendamentos</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>2. O que foi implementado</h2>
+
+    <h3>2.1 O que foi feito como planejado</h3>
+    <div class="caixa-resposta">
+        Todo o planejamento essencial da proposta do 3º bimestre foi transformado no sistema funcional em MVC:<br>
+        1. <strong>Arquitetura MVC:</strong> O sistema foi organizado rigorosamente em Model (acesso ao banco com $pdo protegido), Controller (lógica das ações e autorização) e View (HTML puro com htmlspecialchars), centralizados no Front Controller index.php e carregamento via spl_autoload_register.<br>
+        2. <strong>Visitante:</strong> Visualização do catálogo de serviços com filtro por categoria; tela com detalhes completos do serviço e horários; tela de login e tela de cadastro de novos clientes com validação de senhas.<br>
+        3. <strong>Cliente:</strong> Formulário de agendamento integrado; gravação da solicitação com vínculo obrigatório ao usuario_id da sessão; página "Meus Agendamentos" exibindo somente os agendamentos daquele usuário; cancelamento de agendamento via requisição POST com conferência de dono.<br>
+        4. <strong>Administrador:</strong> Painel de gerenciamento listando todos os serviços; formulário unificado de cadastro e edição com upload de imagens para assets/; sincronização de horários com transações; exclusão via POST com proteção de integridade referencial quando existirem agendamentos associados.<br>
+        5. <strong>Segurança e Camadas:</strong> Todas as consultas preparadas (Prepared Statements via PDO); validação de acessos no servidor impedindo que visitantes ou clientes abram páginas restritas; padrão Post-Redirect-Get (PRG) com mensagens de feedback gravadas na sessão.
+    </div>
+
+    <h3>2.2 O que mudou em relação à proposta e por quê</h3>
+    <div class="caixa-resposta">
+        1. <strong>Migração de scripts procedurais soltos para o Front Controller em MVC:</strong> Na proposta do 3º bimestre, foram projetados scripts individuais como processar_servico.php e excluir_servico.php. Na implementação prática, todas as requisições foram unificadas no ponto de entrada index.php?acao=..., sendo despachadas para métodos de classes controladoras (UsuarioController, ServicoController, AgendarController), atendendo ao padrão MVC exigido na disciplina.<br>
+        2. <strong>Uso de transações atômicas para integridade dos horários:</strong> Como os serviços possuem horários relacionados na tabela horarios, as operações de criação, atualização e exclusão foram encapsuladas em transações PDO ($pdo->beginTransaction(), $pdo->commit(), $pdo->rollBack()) dentro do ServicoModel, garantindo que o banco de dados nunca fique com dados inconsistentes caso ocorra uma falha no salvamento.
+    </div>
+
+    <h3>2.3 O que ficou faltando</h3>
+    <div class="caixa-resposta">
+        Nenhum item obrigatório ficou pendente. Todas as funcionalidades das três personas (Visitante, Cliente e Administrador), o controle de acesso no servidor, o banco de dados relacional e as regras técnicas de segurança e camadas foram integralmente implementados e testados.
+    </div>
+
+    <h3>2.4 Recurso Extra Implementado: URLs Amigáveis (mod_rewrite)</h3>
+    <div class="caixa-resposta">
+        Foi implementado o arquivo .htaccess na raiz do projeto com diretivas mod_rewrite, aceitando endereços amigáveis como /catalogo, /detalhes/1, /login, /meus-agendamentos e /admin/servicos. O sistema continua funcionando perfeitamente sem o .htaccess através do formato padrão index.php?acao=..., e as instruções para ativação do módulo no Apache constam no README.md do projeto.
+    </div>
+
+    <h2>3. O Modelo MVC do Sistema</h2>
+
+    <h3>3.1 Estrutura de Pastas e Arquivos</h3>
+    <pre>TrabalhoWeb/
+├── index.php                      # Ponto único de entrada: sessão, autoload e roteamento
+├── .htaccess                      # URLs amigáveis com mod_rewrite (item extra)
+├── README.md                      # Instruções de execução local e configuração no XAMPP
+├── config/conexao.php             # Conexão PDO segura (charset utf8mb4)
+├── database/banco.sql             # Estrutura das 4 tabelas e dados de teste
+├── css/style.css                  # Estilos complementares da aplicação
+├── assets/                        # Imagens dos cortes e logotipo da barbearia
+├── model/
+│   ├── Model.php                  # Classe abstrata base com protected $pdo
+│   ├── UsuarioModel.php           # Consultas e inserção de usuários com hash
+│   ├── ServicoModel.php           # CRUD de serviços, horários e transações PDO
+│   └── AgendamentoModel.php       # Inserção, listagem restrita por cliente e cancelamento
+├── controller/
+│   ├── Controller.php             # Classe abstrata: render, redirecionar, exigirLogin, exigirPerfil
+│   ├── UsuarioController.php      # Ações de login, cadastro e logout
+│   ├── ServicoController.php      # Catálogo, detalhes e CRUD do administrador
+│   └── AgendarController.php      # Agendamentos e cancelamentos do cliente
+└── view/
+    ├── header.php                 # Topo com navegação dinâmica conforme o perfil logado
+    ├── footer.php                 # Rodapé padrão
+    ├── catalogo_view.php          # Catálogo público de serviços com botões de filtro
+    ├── detalhes_view.php          # Detalhes do serviço com agendamento integrado
+    ├── login_view.php             # Formulário de login com mensagens de erro/sucesso
+    ├── cadastro_view.php          # Formulário de cadastro de novos clientes
+    ├── meus_agendamentos_view.php # Histórico do cliente com cancelamento via POST
+    ├── admin_servicos_view.php    # Painel administrativo com listagem de serviços
+    ├── admin_servico_form_view.php# Formulário unificado de cadastro/edição de serviços
+    └── 404_view.php               # Tela amigável para rotas inexistentes</pre>
+
+    <h3>3.2 Diagrama das Classes</h3>
+    <div class="diagram-grid">
+        <div>
+            <div style="font-weight: bold; margin-bottom: 4px; color: #1F4E79;">Camada Model:</div>
+            <div class="diagram-entity">
+                <div class="diagram-entity-header">&lt;&lt;abstract&gt;&gt; Model</div>
+                <div class="diagram-entity-body"># PDO $pdo<br>+ __construct(PDO $pdo)</div>
+            </div>
+            <div class="diagram-entity">
+                <div class="diagram-entity-header">UsuarioModel extends Model</div>
+                <div class="diagram-entity-body">+ buscarPorEmail($email): array|false<br>+ cadastrar($nome, $email, $senhaHash): bool</div>
+            </div>
+            <div class="diagram-entity">
+                <div class="diagram-entity-header">ServicoModel extends Model</div>
+                <div class="diagram-entity-body">+ listarAtivos($tipo = null): array<br>+ listarTodos(): array<br>+ buscarPorId($id): array|false<br>+ buscarHorarios($servico_id): array<br>+ temAgendamentos($servico_id): bool<br>+ criar(...): bool<br>+ atualizar(...): bool<br>+ excluir($id): bool</div>
+            </div>
+            <div class="diagram-entity">
+                <div class="diagram-entity-header">AgendamentoModel extends Model</div>
+                <div class="diagram-entity-body">+ criar($uid, $sid, $data, $hora, $pessoas, $total): bool<br>+ listarPorUsuario($usuario_id): array<br>+ cancelar($id, $usuario_id): bool<br>+ buscarPorIdEDono($id, $usuario_id): array|false</div>
+            </div>
+        </div>
+        <div>
+            <div style="font-weight: bold; margin-bottom: 4px; color: #1F4E79;">Camada Controller:</div>
+            <div class="diagram-entity">
+                <div class="diagram-entity-header">&lt;&lt;abstract&gt;&gt; Controller</div>
+                <div class="diagram-entity-body">+ render($view, $dados = []): void<br>+ redirecionar($rota): void<br>+ exigirLogin(): void<br>+ exigirPerfil($perfilnecessario): void</div>
+            </div>
+            <div class="diagram-entity">
+                <div class="diagram-entity-header">UsuarioController extends Controller</div>
+                <div class="diagram-entity-body">+ login(): void<br>+ cadastro(): void<br>+ logout(): void</div>
+            </div>
+            <div class="diagram-entity">
+                <div class="diagram-entity-header">ServicoController extends Controller</div>
+                <div class="diagram-entity-body">+ catalogo(): void<br>+ detalhes(): void<br>+ admin_servicos(): void<br>+ admin_servico_form(): void<br>+ admin_servico_salvar(): void<br>+ admin_servico_excluir(): void<br>+ naoEncontrado(): void</div>
+            </div>
+            <div class="diagram-entity">
+                <div class="diagram-entity-header">AgendarController extends Controller</div>
+                <div class="diagram-entity-body">+ agendar(): void<br>+ meus_agendamentos(): void<br>+ cancelar_agendamento(): void</div>
+            </div>
+        </div>
+    </div>
+
+    <h3>3.3 Tabela de Rotas</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Ação (<code>acao</code>)</th>
+                <th>Método</th>
+                <th>Controller</th>
+                <th>Método Chamado</th>
+                <th>Model Usado</th>
+                <th>View ou Redirecionamento</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>(padrão) ou <code>catalogo</code></td>
+                <td>GET</td>
+                <td>ServicoController</td>
+                <td>catalogo()</td>
+                <td>ServicoModel</td>
+                <td>view/catalogo_view.php</td>
+            </tr>
+            <tr>
+                <td><code>detalhes</code></td>
+                <td>GET</td>
+                <td>ServicoController</td>
+                <td>detalhes()</td>
+                <td>ServicoModel</td>
+                <td>view/detalhes_view.php</td>
+            </tr>
+            <tr>
+                <td><code>login</code></td>
+                <td>GET / POST</td>
+                <td>UsuarioController</td>
+                <td>login()</td>
+                <td>UsuarioModel</td>
+                <td>login_view.php ou redirecionamento</td>
+            </tr>
+            <tr>
+                <td><code>cadastro</code></td>
+                <td>GET / POST</td>
+                <td>UsuarioController</td>
+                <td>cadastro()</td>
+                <td>UsuarioModel</td>
+                <td>cadastro_view.php ou redirecionamento</td>
+            </tr>
+            <tr>
+                <td><code>logout</code></td>
+                <td>GET</td>
+                <td>UsuarioController</td>
+                <td>logout()</td>
+                <td>—</td>
+                <td>Destrói sessão e vai para login</td>
+            </tr>
+            <tr>
+                <td><code>agendar</code></td>
+                <td>POST</td>
+                <td>AgendarController</td>
+                <td>agendar()</td>
+                <td>ServicoModel, AgendamentoModel</td>
+                <td>Redireciona para meus_agendamentos</td>
+            </tr>
+            <tr>
+                <td><code>meus_agendamentos</code></td>
+                <td>GET</td>
+                <td>AgendarController</td>
+                <td>meus_agendamentos()</td>
+                <td>AgendamentoModel</td>
+                <td>view/meus_agendamentos_view.php</td>
+            </tr>
+            <tr>
+                <td><code>cancelar_agendamento</code></td>
+                <td>POST</td>
+                <td>AgendarController</td>
+                <td>cancelar_agendamento()</td>
+                <td>AgendamentoModel</td>
+                <td>Redireciona para meus_agendamentos</td>
+            </tr>
+            <tr>
+                <td><code>admin_servicos</code></td>
+                <td>GET</td>
+                <td>ServicoController</td>
+                <td>admin_servicos()</td>
+                <td>ServicoModel</td>
+                <td>view/admin_servicos_view.php</td>
+            </tr>
+            <tr>
+                <td><code>admin_servico_form</code></td>
+                <td>GET</td>
+                <td>ServicoController</td>
+                <td>admin_servico_form()</td>
+                <td>ServicoModel</td>
+                <td>view/admin_servico_form_view.php</td>
+            </tr>
+            <tr>
+                <td><code>admin_servico_salvar</code></td>
+                <td>POST</td>
+                <td>ServicoController</td>
+                <td>admin_servico_salvar()</td>
+                <td>ServicoModel</td>
+                <td>Redireciona para admin_servicos</td>
+            </tr>
+            <tr>
+                <td><code>admin_servico_excluir</code></td>
+                <td>POST</td>
+                <td>ServicoController</td>
+                <td>admin_servico_excluir()</td>
+                <td>ServicoModel</td>
+                <td>Redireciona para admin_servicos</td>
+            </tr>
+            <tr>
+                <td>(rota inexistente)</td>
+                <td>GET / POST</td>
+                <td>ServicoController</td>
+                <td>naoEncontrado()</td>
+                <td>—</td>
+                <td>view/404_view.php (código 404)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>3.4 O Caminho de um Pedido (do clique até a tela)</h3>
+    <div class="caixa-resposta">
+        <strong>Exemplo: Cliente logado confirmando um agendamento de serviço:</strong><br>
+        1. <strong>Navegador (Disparo):</strong> O cliente preenche o formulário na tela de detalhes e clica em "Confirmar Agendamento", enviando uma requisição POST para index.php?acao=agendar com os dados do formulário.<br>
+        2. <strong>index.php (Front Controller):</strong> Inicia a sessão com session_start(), aciona a função registrada no spl_autoload_register para carregar o arquivo controller/AgendarController.php e a classe Model. No switch ($acao), instancia o controlador passando a conexão $pdo e executa o método $controller->agendar().<br>
+        3. <strong>AgendarController (Lógica e Segurança):</strong> Executa $this->exigirLogin(), garantindo que o usuário está logado. Em seguida, recupera o id do usuário diretamente de $_SESSION['usuario_id'] (o dono nunca vem do formulário) e busca os dados do serviço no ServicoModel para calcular o valor total com segurança.<br>
+        4. <strong>AgendamentoModel (Banco de Dados):</strong> O controller chama $agendamentoModel->criar(...). O model monta a consulta SQL com prepared statements ($pdo->prepare("INSERT INTO agendamentos ...")), vincula os parâmetros e grava no MySQL.<br>
+        5. <strong>Redirecionamento (Padrão PRG):</strong> O controller grava a mensagem de sucesso em $_SESSION['sucesso'] e emite header("Location: index.php?acao=meus_agendamentos") com exit.<br>
+        6. <strong>Nova Requisição GET (Exibição):</strong> O navegador solicita index.php?acao=meus_agendamentos. O AgendarController executa meus_agendamentos(), consulta apenas as solicitações do usuário logado via $agendamentoModel->listarPorUsuario($_SESSION['usuario_id']) e chama $this->render('meus_agendamentos_view', ['agendamentos' => $dados]). A view recebe os dados e exibe a tabela HTML tratando todas as saídas com htmlspecialchars().
+    </div>
+
+    <h2>4. Atribuições dos Integrantes</h2>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 28%;">Integrante</th>
+                <th>Responsabilidades e Arquivos Implementados</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Luan Henrique Neves Miranda</td>
+                <td>
+                    • Modelagem do banco de dados relacional e script database/banco.sql com as 4 tabelas e dados de teste.<br>
+                    • Implementação da classe base abstrata model/Model.php e arquivo de conexão config/conexao.php.<br>
+                    • Desenvolvimento da classe model/UsuarioModel.php com métodos de autenticação e criptografia password_hash().
+                </td>
+            </tr>
+            <tr>
+                <td>Miguel Silva Rodrigues</td>
+                <td>
+                    • Implementação do Front Controller index.php com spl_autoload_register e tabela de rotas.<br>
+                    • Desenvolvimento de model/ServicoModel.php (catálogo e transações de horários) e controller/ServicoController.php.<br>
+                    • Desenvolvimento visual das views públicas: catalogo_view.php, detalhes_view.php, header.php, footer.php e 404_view.php.
+                </td>
+            </tr>
+            <tr>
+                <td>Rafael Borges Silva</td>
+                <td>
+                    • Criação da classe base abstrata controller/Controller.php com render, redirecionar, exigirLogin e exigirPerfil.<br>
+                    • Desenvolvimento completo do CRUD do Administrador (ações no controller e views admin_servicos_view.php e admin_servico_form_view.php).<br>
+                    • Módulo de agendamentos do cliente (AgendamentoModel.php, AgendarController.php, meus_agendamentos_view.php) e configuração de URLs amigáveis com .htaccess.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>5. Registro do Uso de IA e das Referências</h2>
+
+    <p style="margin-bottom: 6px;">O grupo utilizou IA nesta atividade? ( X ) sim &nbsp;&nbsp;&nbsp;&nbsp; ( &nbsp; ) não</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Ferramenta / Modelo</th>
+                <th>Pedido ou Tarefa</th>
+                <th>O que foi aproveitado</th>
+                <th>Como o grupo verificou ou corrigiu a resposta</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Claude IA</td>
+                <td>Simulação de layout Bootstrap e estrutura de tabelas e formulários para as telas em MVC.</td>
+                <td>Estrutura de formulários, tabelas e cards responsivos.</td>
+                <td>O grupo revisou o código HTML removendo qualquer lógica de consulta ou superglobais proibidas na camada View, mantendo conformidade com as regras da disciplina.</td>
+            </tr>
+            <tr>
+                <td>ChatGPT</td>
+                <td>Apoio na elaboração da tabela de rotas e fluxo Post-Redirect-Get.</td>
+                <td>Sugestão da lógica de mensagens de sucesso/erro via $_SESSION e redirecionamento.</td>
+                <td>Ajustamos os nomes das ações e rotas para casar rigorosamente com os métodos de controle definidos no index.php.</td>
+            </tr>
+            <tr>
+                <td>Antigravity / Gemini 3.8</td>
+                <td>Auditoria de conformidade com o HackMD, conferência de camadas MVC e estruturação dos diagramas de classes e de fluxo.</td>
+                <td>Implementação e revisão dos models, controllers e views, conferência de queries preparadas e ausência de SQL nos controllers.</td>
+                <td>Validação com o linter do PHP (php -l), testes práticos no navegador e busca automatizada por violações de camadas (SELECT, $_POST, header).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Referências consultadas (documentação, material da disciplina, sites, vídeos), com links:</h3>
+    <div class="caixa-resposta">
+        1. Documentação Oficial do PHP - PDO e Prepared Statements. Disponível em: https://www.php.net/manual/pt_BR/book.pdo.php<br>
+        2. Documentação Oficial do PHP - Funções de hash de senha (password_hash e password_verify). Disponível em: https://www.php.net/manual/pt_BR/ref.password.php<br>
+        3. Documentação Oficial do PHP - Sessões e spl_autoload_register. Disponível em: https://www.php.net/manual/pt_BR/function.spl-autoload-register.php<br>
+        4. Laboratório 13 (CEFET-MG Contagem) - Arquitetura MVC e Front Controller no Minhas Leituras.<br>
+        5. Documentação Oficial do Bootstrap 5 - Componentes e Utilitários. Disponível em: https://getbootstrap.com/docs/5.3/
+    </div>
+
+    <div class="footer-pagina">
+        Projeto de Evolução do Sistema · página 20
+    </div>
+
+</div>
+
+</body>
+</html>
