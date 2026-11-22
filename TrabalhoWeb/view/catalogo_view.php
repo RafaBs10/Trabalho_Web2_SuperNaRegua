@@ -1,32 +1,4 @@
-<?php
-require 'dados.php';
-
-if (isset($_GET['tipo'])) {
-    $tipoFiltro = $_GET['tipo'];
-
-    $listaFiltrada = [];
-
-    foreach ($servicos as $servico) {
-        if ($servico["tipo"] == $tipoFiltro) {
-            $listaFiltrada[] = $servico;
-        }
-    }
-
-} else {
-    $listaFiltrada = $servicos;
-}
-
-$totalServicos = count($listaFiltrada);
-
-$listaTipos = [];
-foreach ($servicos as $servico) {
-    if (!in_array($servico["tipo"], $listaTipos)) {
-        $listaTipos[] = $servico["tipo"];
-    }
-}
-?>
-
-<?php require 'header.php'; ?>
+<?php require 'view/header.php'; ?>
 
 <div class="container mt-4">
     <h1>Serviços</h1>
@@ -56,7 +28,7 @@ foreach ($servicos as $servico) {
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($listaFiltrada as $servico): ?>
+                <?php foreach ($servicos as $servico): ?>
                     <tr <?php echo empty($servico["horarios"]) ? 'class="table-secondary"' : ''; ?>>
                         <td><?php echo htmlspecialchars($servico["nome"]); ?></td>
                         <td>
@@ -73,7 +45,7 @@ foreach ($servicos as $servico) {
                             <?php endif; ?>
                         </td>
                         <td>
-                            <a href="detalhes.php?id=<?php echo $servico["id"]; ?>" class="btn btn-sm btn-primary">
+                            <a href="index.php?acao=detalhes&id=<?= $servico['id'] ?>" class="btn btn-sm btn-primary">
                                 Detalhes
                             </a>
                         </td>
@@ -84,4 +56,4 @@ foreach ($servicos as $servico) {
     </div>
 </div>
 
-<?php require 'footer.php'; ?>
+<?php require 'view/footer.php'; ?>
