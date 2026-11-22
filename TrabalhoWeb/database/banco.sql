@@ -1,16 +1,9 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Tempo de geração: 21-Nov-2026 às 15:10
--- Versão do servidor: 10.4.32-MariaDB
--- versão do PHP: 8.2.12
+-- Banco de dados do projeto Super na Régua
+-- WEB2 / LWEB2 - CEFET-MG Contagem
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -18,44 +11,48 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `banco`
+-- Tabela `usuarios`
 --
 
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `agendamentos`
---
-
-CREATE TABLE `agendamentos` (
-  `id` int(11) NOT NULL,
-  `usuario_id` int(11) NOT NULL,
-  `servico_id` int(11) NOT NULL,
-  `data_agendamento` date NOT NULL,
-  `horario` varchar(5) NOT NULL,
-  `pessoas` int(11) NOT NULL DEFAULT 1,
-  `valor_total` decimal(10,2) NOT NULL,
-  `status` varchar(15) NOT NULL DEFAULT 'pendente'
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `senha` varchar(255) NOT NULL,
+  `perfil` varchar(10) NOT NULL DEFAULT 'cliente',
+  `data_cadastro` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dados de teste para `usuarios` (senha padrao: 123456)
+--
+
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `perfil`, `data_cadastro`) VALUES
+(1, 'Administrador', 'admin@supernaregua.com', '$2y$10$thg5SCSwZQrBzfaXEBkZ/OheVLkiIOfqY3X1OcrBXJ2Ruxl5iy4.W', 'admin', '2026-11-21 11:09:13'),
+(2, 'João Cliente', 'joao@email.com', '$2y$10$thg5SCSwZQrBzfaXEBkZ/OheVLkiIOfqY3X1OcrBXJ2Ruxl5iy4.W', 'cliente', '2026-11-21 11:09:13'),
+(3, 'Maria Cliente', 'maria@email.com', '$2y$10$thg5SCSwZQrBzfaXEBkZ/OheVLkiIOfqY3X1OcrBXJ2Ruxl5iy4.W', 'cliente', '2026-11-21 11:09:13');
+
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `servicos`
+-- Tabela `servicos`
 --
 
-CREATE TABLE `servicos` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `servicos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   `tipo` varchar(30) NOT NULL,
   `valor` decimal(10,2) NOT NULL,
   `descricao` text NOT NULL,
   `imagem` varchar(255) DEFAULT NULL,
-  `ativo` tinyint(1) NOT NULL DEFAULT 1
+  `ativo` tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `servicos`
+-- Dados de teste para `servicos`
 --
 
 INSERT INTO `servicos` (`id`, `nome`, `tipo`, `valor`, `descricao`, `imagem`, `ativo`) VALUES
@@ -70,84 +67,83 @@ INSERT INTO `servicos` (`id`, `nome`, `tipo`, `valor`, `descricao`, `imagem`, `a
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuarios`
+-- Tabela `horarios`
 --
 
-CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `senha` varchar(255) NOT NULL,
-  `perfil` varchar(10) NOT NULL DEFAULT 'cliente',
-  `data_cadastro` datetime NOT NULL DEFAULT current_timestamp()
+CREATE TABLE IF NOT EXISTS `horarios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `servico_id` int(11) NOT NULL,
+  `hora` varchar(5) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `servico_id` (`servico_id`),
+  CONSTRAINT `fk_horarios_servicos` FOREIGN KEY (`servico_id`) REFERENCES `servicos` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `usuarios`
+-- Dados de teste para `horarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `perfil`, `data_cadastro`) VALUES
-(1, 'Administrador', 'admin@supernaregua.com', '$2y$10$thg5SCSwZQrBzfaXEBkZ/OheVLkiIOfqY3X1OcrBXJ2Ruxl5iy4.W', 'admin', '2026-11-21 11:09:13'),
-(2, 'João Cliente', 'joao@email.com', '$2y$10$thg5SCSwZQrBzfaXEBkZ/OheVLkiIOfqY3X1OcrBXJ2Ruxl5iy4.W', 'cliente', '2026-11-21 11:09:13'),
-(3, 'Maria Cliente', 'maria@email.com', '$2y$10$thg5SCSwZQrBzfaXEBkZ/OheVLkiIOfqY3X1OcrBXJ2Ruxl5iy4.W', 'cliente', '2026-11-21 11:09:13');
+INSERT INTO `horarios` (`id`, `servico_id`, `hora`) VALUES
+(1, 1, '09:00'),
+(2, 1, '10:00'),
+(3, 1, '11:00'),
+(4, 1, '14:00'),
+(5, 1, '16:00'),
+(6, 2, '10:00'),
+(7, 2, '11:00'),
+(8, 2, '13:00'),
+(9, 2, '15:00'),
+(10, 2, '17:00'),
+(11, 3, '09:30'),
+(12, 3, '11:30'),
+(13, 3, '14:30'),
+(14, 3, '16:30'),
+(15, 4, '10:00'),
+(16, 4, '14:00'),
+(17, 4, '16:00'),
+(18, 4, '18:00'),
+(19, 5, '09:00'),
+(20, 5, '11:00'),
+(21, 5, '13:00'),
+(22, 5, '15:00'),
+(23, 5, '17:00'),
+(24, 6, '10:30'),
+(25, 6, '14:30'),
+(26, 6, '16:30'),
+(27, 7, '09:00'),
+(28, 7, '13:30'),
+(29, 7, '15:30');
+
+-- --------------------------------------------------------
 
 --
--- Índices para tabelas despejadas
+-- Tabela `agendamentos`
 --
 
---
--- Índices para tabela `agendamentos`
---
-ALTER TABLE `agendamentos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `usuario_id` (`usuario_id`),
-  ADD KEY `servico_id` (`servico_id`);
+CREATE TABLE IF NOT EXISTS `agendamentos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario_id` int(11) NOT NULL,
+  `servico_id` int(11) NOT NULL,
+  `data_agendamento` date NOT NULL,
+  `horario` varchar(5) NOT NULL,
+  `pessoas` int(11) NOT NULL DEFAULT 1,
+  `valor_total` decimal(10,2) NOT NULL,
+  `status` varchar(15) NOT NULL DEFAULT 'pendente',
+  PRIMARY KEY (`id`),
+  KEY `usuario_id` (`usuario_id`),
+  KEY `servico_id` (`servico_id`),
+  CONSTRAINT `fk_agendamentos_usuarios` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`),
+  CONSTRAINT `fk_agendamentos_servicos` FOREIGN KEY (`servico_id`) REFERENCES `servicos` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Índices para tabela `servicos`
---
-ALTER TABLE `servicos`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices para tabela `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
-
---
--- AUTO_INCREMENT de tabelas despejadas
+-- Dados de teste para `agendamentos`
 --
 
---
--- AUTO_INCREMENT de tabela `agendamentos`
---
-ALTER TABLE `agendamentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+INSERT INTO `agendamentos` (`id`, `usuario_id`, `servico_id`, `data_agendamento`, `horario`, `pessoas`, `valor_total`, `status`) VALUES
+(1, 2, 1, '2026-11-25', '10:00', 1, 30.00, 'confirmado'),
+(2, 3, 4, '2026-11-26', '14:00', 1, 45.00, 'pendente');
 
---
--- AUTO_INCREMENT de tabela `servicos`
---
-ALTER TABLE `servicos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT de tabela `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- Restrições para despejos de tabelas
---
-
---
--- Limitadores para a tabela `agendamentos`
---
-ALTER TABLE `agendamentos`
-  ADD CONSTRAINT `agendamentos_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`),
-  ADD CONSTRAINT `agendamentos_ibfk_2` FOREIGN KEY (`servico_id`) REFERENCES `servicos` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

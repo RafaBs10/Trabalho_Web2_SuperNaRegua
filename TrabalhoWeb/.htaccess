@@ -1,0 +1,22 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Ignora arquivos e pastas reais existentes no disco
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Rotas amigaveis
+    RewriteRule ^catalogo/?$ index.php?acao=catalogo [QSA,L]
+    RewriteRule ^detalhes/([0-9]+)/?$ index.php?acao=detalhes&id=$1 [QSA,L]
+    RewriteRule ^login/?$ index.php?acao=login [QSA,L]
+    RewriteRule ^cadastro/?$ index.php?acao=cadastro [QSA,L]
+    RewriteRule ^logout/?$ index.php?acao=logout [QSA,L]
+    RewriteRule ^meus-agendamentos/?$ index.php?acao=meus_agendamentos [QSA,L]
+    RewriteRule ^admin/servicos/?$ index.php?acao=admin_servicos [QSA,L]
+    RewriteRule ^admin/servicos/novo/?$ index.php?acao=admin_servico_form [QSA,L]
+    RewriteRule ^admin/servicos/editar/([0-9]+)/?$ index.php?acao=admin_servico_form&id=$1 [QSA,L]
+
+    # Redirecionamento generico para index.php passando a acao
+    RewriteRule ^([a-zA-Z0-9_-]+)/?$ index.php?acao=$1 [QSA,L]
+</IfModule>

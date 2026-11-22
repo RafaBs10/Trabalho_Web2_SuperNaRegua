@@ -2,14 +2,14 @@
 
 <div class="container mt-4">
     <?php if (isset($_SESSION['erro'])): ?>
-        <div class="alert alert-danger">
+        <div class="alert alert-danger alert-dismissible fade show">
             <?= htmlspecialchars($_SESSION['erro']) ?>
         </div>
         <?php unset($_SESSION['erro']); ?>
     <?php endif; ?>
 
     <?php if (isset($_SESSION['sucesso'])): ?>
-        <div class="alert alert-success">
+        <div class="alert alert-success alert-dismissible fade show">
             <?= htmlspecialchars($_SESSION['sucesso']) ?>
         </div>
         <?php unset($_SESSION['sucesso']); ?>
@@ -44,6 +44,17 @@
                         <h4 class="text-success fw-bold">
                             R$ <?= number_format($servico['valor'], 2, ',', '.') ?>
                         </h4>
+
+                        <div class="mt-3">
+                            <strong>Horários disponíveis:</strong>
+                            <p class="mt-1">
+                                <?php if (!empty($servico['horarios'])): ?>
+                                    <span class="text-secondary"><?= htmlspecialchars(implode(', ', $servico['horarios'])) ?></span>
+                                <?php else: ?>
+                                    <span class="badge bg-danger">Consulte disponibilidade</span>
+                                <?php endif; ?>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -55,7 +66,7 @@
                     </div>
                     <div class="card-body">
                         <?php if (isset($_SESSION['usuario_id'])): ?>
-                            <?php if ($_SESSION['perfil'] === 'cliente'): ?>
+                            <?php if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'cliente'): ?>
                                 <form method="POST" action="index.php?acao=agendar">
                                     <input type="hidden" name="servico_id" value="<?= htmlspecialchars($servico['id']) ?>">
 
@@ -73,17 +84,23 @@
                                         <label for="horario" class="form-label">Horário:</label>
                                         <select name="horario" id="horario" class="form-select" required>
                                             <option value="">Selecione um horário</option>
-                                            <option value="08:00">08:00</option>
-                                            <option value="09:00">09:00</option>
-                                            <option value="10:00">10:00</option>
-                                            <option value="11:00">11:00</option>
-                                            <option value="13:00">13:00</option>
-                                            <option value="14:00">14:00</option>
-                                            <option value="15:00">15:00</option>
-                                            <option value="16:00">16:00</option>
-                                            <option value="17:00">17:00</option>
-                                            <option value="18:00">18:00</option>
-                                            <option value="19:00">19:00</option>
+                                            <?php if (!empty($servico['horarios'])): ?>
+                                                <?php foreach ($servico['horarios'] as $h): ?>
+                                                    <option value="<?= htmlspecialchars($h) ?>"><?= htmlspecialchars($h) ?></option>
+                                                <?php endforeach; ?>
+                                            <?php else: ?>
+                                                <option value="08:00">08:00</option>
+                                                <option value="09:00">09:00</option>
+                                                <option value="10:00">10:00</option>
+                                                <option value="11:00">11:00</option>
+                                                <option value="13:00">13:00</option>
+                                                <option value="14:00">14:00</option>
+                                                <option value="15:00">15:00</option>
+                                                <option value="16:00">16:00</option>
+                                                <option value="17:00">17:00</option>
+                                                <option value="18:00">18:00</option>
+                                                <option value="19:00">19:00</option>
+                                            <?php endif; ?>
                                         </select>
                                     </div>
 

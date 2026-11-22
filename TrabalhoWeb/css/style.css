@@ -4,17 +4,18 @@
     --branco: #ffffff;
 }
 
-/* O !important é necessário para sobrescrever a cor padrão do Bootstrap */
+/* barra de navegacao com o azul da barbearia */
 .navbar {
     background-color: var(--azul) !important;
 }
 
-/* Tamanho da logo na navbar */
+/* tamanho da logo na barra */
 .navbar-brand img {
     height: 45px;
     margin-right: 10px;
 }
 
+/* botoes estilizados no tom vermelho */
 .btn-dark {
     background-color: var(--vermelho) !important;
     border-color: var(--vermelho) !important;
@@ -35,15 +36,39 @@
     border-color: var(--vermelho) !important;
 }
 
-.table thead {
-    background-color: var(--azul) !important;
+.btn-primary:hover {
+    background-color: #a80000 !important;
+    border-color: #a80000 !important;
 }
 
+.btn-danger {
+    background-color: var(--vermelho) !important;
+    border-color: var(--vermelho) !important;
+}
+
+.btn-outline-danger {
+    color: var(--vermelho) !important;
+    border-color: var(--vermelho) !important;
+}
+
+.btn-outline-danger:hover {
+    background-color: var(--vermelho) !important;
+    color: var(--branco) !important;
+}
+
+/* cabecalho da tabela */
+.table thead th {
+    background-color: var(--azul) !important;
+    color: var(--branco) !important;
+}
+
+/* badges */
 .badge.bg-primary {
     background-color: var(--azul) !important;
 }
 
+/* cartoes arredondados */
 .card {
     border-radius: 16px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }

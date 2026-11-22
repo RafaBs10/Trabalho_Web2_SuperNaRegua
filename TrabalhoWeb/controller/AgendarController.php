@@ -11,7 +11,7 @@ class AgendarController extends Controller
         $this->servicoModel = new ServicoModel($pdo);
     }
 
-    // Acao para processar a solicitacao de agendamento (Cliente)
+    // acao para processar a solicitacao de agendamento (Cliente)
     public function agendar()
     {
         $this->exigirLogin();
@@ -34,7 +34,7 @@ class AgendarController extends Controller
                 return;
             }
 
-            // Busca informacoes reais do servico no banco para calcular valor
+            // busca informacoes do servico no banco para calcular o valor
             $servico = $this->servicoModel->buscarPorId($servico_id);
 
             if (!$servico) {
@@ -43,7 +43,7 @@ class AgendarController extends Controller
                 return;
             }
 
-            // O dono vem obrigatoriamente da sessao
+            // o dono vem obrigatoriamente da sessao
             $usuario_id = $_SESSION['usuario_id'];
             $valor_total = $servico['valor'] * $pessoas;
 
@@ -69,16 +69,10 @@ class AgendarController extends Controller
         $this->redirecionar('index.php?acao=catalogo');
     }
 
-    // Acao para listar apenas as proprias solicitacoes do cliente logado
+    // acao para listar apenas as proprias solicitacoes do usuario logado
     public function meus_agendamentos()
     {
         $this->exigirLogin();
-
-        if ($_SESSION['perfil'] !== 'cliente') {
-            $_SESSION['erro'] = "Área exclusiva para clientes.";
-            $this->redirecionar('index.php?acao=catalogo');
-            return;
-        }
 
         $usuario_id = $_SESSION['usuario_id'];
         $agendamentos = $this->agendamentoModel->listarPorUsuario($usuario_id);
@@ -88,7 +82,7 @@ class AgendarController extends Controller
         ]);
     }
 
-    // Acao para cancelar solicitacao pertencente ao cliente logado (somente por POST)
+    // acao para cancelar solicitacao pertencente ao usuario logado (somente por POST)
     public function cancelar_agendamento()
     {
         $this->exigirLogin();
