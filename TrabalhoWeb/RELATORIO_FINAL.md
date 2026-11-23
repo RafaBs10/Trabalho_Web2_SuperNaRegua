@@ -8,7 +8,7 @@
 |---|---|
 | **Nome do sistema** | Super na Régua |
 | **Domínio (do 1º bimestre)** | `https://supernaregua.gamer.gd/index.php` |
-| **URL do sistema publicado (4º bimestre)** | `https://supernaregua.infinityfreeapp.com` |
+| **URL do sistema publicado (4º bimestre)** | `https://supernarregua.free.je/` |
 | **Link do vídeo (até 10 min)** | `https://youtu.be/SEU_LINK_AQUI` |
 | **Integrante 1** | Luan Henrique Neves Miranda |
 | **Integrante 2** | Miguel Silva Rodrigues |
@@ -228,10 +228,8 @@ O grupo utilizou IA nesta atividade? ( X ) sim &nbsp;&nbsp;&nbsp;&nbsp; ( &nbsp;
 ### Referências consultadas (documentação, material da disciplina, sites, vídeos), com links:
 
 1. Documentação Oficial do PHP - PDO e Prepared Statements. Disponível em: `https://www.php.net/manual/pt_BR/book.pdo.php`
-2. Documentação Oficial do PHP - Funções de hash de senha (`password_hash` e `password_verify`). Disponível em: `https://www.php.net/manual/pt_BR/ref.password.php`
-3. Documentação Oficial do PHP - Sessões e `spl_autoload_register`. Disponível em: `https://www.php.net/manual/pt_BR/function.spl-autoload-register.php`
-4. Laboratório 13 (CEFET-MG Contagem) - Arquitetura MVC e Front Controller no Minhas Leituras.
-5. Documentação Oficial do Bootstrap 5 - Componentes e Utilitários. Disponível em: `https://getbootstrap.com/docs/5.3/`
+2. Documentação Oficial do PHP - Sessões e `spl_autoload_register`. Disponível em: `https://www.php.net/manual/pt_BR/function.spl-autoload-register.php`
+3. Tópico 09. MVC e POO em PHP - Moodle da disciplina de Aplicações para Web II (Prof.ª Elizabeth Duane · CEFET-MG Unidade Contagem).
 
 ---
 *Projeto de Evolução do Sistema · página 20*
